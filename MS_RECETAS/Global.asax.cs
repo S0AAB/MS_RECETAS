@@ -1,11 +1,10 @@
+using Autofac;
+using Autofac.Integration.Mvc;
+using MS_RECETAS.App_Start;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
 
 namespace MS_RECETAS
 {
@@ -13,11 +12,20 @@ namespace MS_RECETAS
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
+   
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutofacConfig.Register();
+
+            var receptorMQ = DependencyResolver.Current.GetService<ReceptorMQ>();
+
+            if (receptorMQ != null)
+            {
+                Task.Run(() => receptorMQ.Escucha());
+            }
+            else
+            {
+                throw new Exception("Error: No se pudo resolver la dependencia de ReceptorMQ en Autofac.");
+            }
         }
     }
 }
