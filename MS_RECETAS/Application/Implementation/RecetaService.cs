@@ -12,10 +12,10 @@ namespace MS_RECETAS.Application.Implementation
 	    public class RecetaService: IRecetaService
 	    {
 		    private IRecetasRepository _recetasRepository;
-            private PersonaServiceAPI _personaServiceAPI;
+            private IPersonaServiceAPI _personaServiceAPI;
             private readonly IMapper _mapper;
             //Inyeccion de dependencias
-            public RecetaService(IRecetasRepository recetasRepository, IMapper mapper, PersonaServiceAPI personaServiceAPI)
+            public RecetaService(IRecetasRepository recetasRepository, IMapper mapper, IPersonaServiceAPI personaServiceAPI)
             {
                 _recetasRepository = recetasRepository;
                 _personaServiceAPI = personaServiceAPI;
@@ -80,20 +80,20 @@ namespace MS_RECETAS.Application.Implementation
                 return true;
             }
 
-            public async Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
+        {
+            if (!_recetasRepository.Exists(id))
             {
-                if (!_recetasRepository.Exists(id))
-                {
-                    return false;
-                }
-                var receta= _recetasRepository.GetById(id);
-                _recetasRepository.Delete(receta);
-                return true;
+                return false;
             }
+            var receta = _recetasRepository.GetById(id);
+            _recetasRepository.Delete(receta);
+            return true;
+        }
 
 
-            //Funcion para validar roles y estado activo antes de crear la receta
-            private async Task<bool> ValidarPaciente(int pacienteId)
+        //Funcion para validar roles y estado activo antes de crear la receta
+        private async Task<bool> ValidarPaciente(int pacienteId)
             {
                 PersonaDto paciente = await _personaServiceAPI.ObtenerPersona(pacienteId);
                 Debug.WriteLine($"Paciente: {JsonConvert.SerializeObject(paciente)}");

@@ -23,7 +23,7 @@ namespace MS_RECETAS.Domain.Models
         public Nullable<System.DateTime> FechaVencimiento { get; set; }
         public int EstadoId { get; set; }
 
-        [JsonIgnore]
+    
         public virtual EstadosReceta EstadosReceta { get; set; }
     }
 }

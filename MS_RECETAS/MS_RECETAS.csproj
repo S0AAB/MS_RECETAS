@@ -198,7 +198,8 @@
     <Compile Include="Application\Dto\EstadoRecetaDto.cs" />
     <Compile Include="Application\Dto\PersonaDto.cs" />
     <Compile Include="Application\Dto\RecetaDto.cs" />
-    <Compile Include="Application\Implementation\PersonaServiceAPI.cs" />
+    <Compile Include="Infrastructure\ClientMS\IPersonaServiceAPI.cs" />
+    <Compile Include="Infrastructure\ClientMS\PersonaServiceAPI.cs" />
     <Compile Include="Application\Implementation\ReceptorMQ.cs" />
     <Compile Include="Application\Implementation\RecetaService.cs" />
     <Compile Include="Application\Mappings\EstadoRecetaMapping.cs" />

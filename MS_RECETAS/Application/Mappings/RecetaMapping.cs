@@ -9,7 +9,7 @@ namespace MS_RECETAS.Application.Mappings
     {
         public RecetaMapping()
         {
-            CreateMap<RecetaDto, Recetas>().ReverseMap().ForMember(dest => dest.EstadoId, opt => opt.Ignore());
+            CreateMap<RecetaDto, Recetas>().ReverseMap();
         }
     }
 

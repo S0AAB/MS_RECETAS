@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 
-public class PersonaServiceAPI
+public class PersonaServiceAPI:IPersonaServiceAPI
 {
     private readonly RestClient _client;
     private readonly string _baseUrl = "https://localhost:44345/api/Personas";

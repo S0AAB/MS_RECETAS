@@ -33,7 +33,8 @@ namespace MS_RECETAS.App_Start
 
             //Registro servicio API CITAS
 
-            builder.RegisterType<PersonaServiceAPI>().SingleInstance();
+            builder.RegisterType<PersonaServiceAPI>().As<IPersonaServiceAPI>().InstancePerLifetimeScope();
+
             //RabbitMQ
             builder.RegisterType<ReceptorMQ>().AsSelf().SingleInstance();
 

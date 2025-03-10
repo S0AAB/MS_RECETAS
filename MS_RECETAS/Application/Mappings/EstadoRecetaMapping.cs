@@ -15,8 +15,7 @@ namespace MS_RECETAS.Application.Mappings
 
             CreateMap<EstadosReceta, EstadoRecetaDto>().ReverseMap();
 
-            //Ignora coleccion recetas
-            CreateMap<EstadoRecetaDto, EstadosReceta>().ForMember(dest => dest.Recetas, opt => opt.Ignore());
+        
         }
     }
 }
